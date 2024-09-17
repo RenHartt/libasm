@@ -1,6 +1,8 @@
 NAME = libasm.a
 SRCS := ft_strlen.s \
+		ft_strcpy.s \
 		ft_strcmp.s
+
 SRCS := $(addprefix srcs/, $(SRCS))
 CFLAGS = -Wall -Wextra -Werror
 NASMFLAGS = -f elf64

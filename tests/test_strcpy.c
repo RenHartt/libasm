@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_strcmp.c                                      :+:      :+:    :+:   */
+/*   test_strcpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baptistegoron <baptistegoron@42angouleme.  +#+  +:+       +#+        */
+/*   By: bgoron <bgoron@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 16:00:58 by baptistegoron     #+#    #+#             */
-/*   Updated: 2024/09/17 15:31:12 by bgoron           ###   ########.fr       */
+/*   Created: 2024/09/17 14:42:12 by bgoron            #+#    #+#             */
+/*   Updated: 2024/09/17 15:09:05 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
-int	ft_strcmp(const char *str1, const char *str2);
+char *ft_strcpy(const char *dst, const char *src);
 
-int main(void)
+int main (void)
 {
-	char *str1 = "A";
-	char *str2 = "B";
+	char *src = "Hello world";
+	char *dst = malloc(strlen(src) + 1);
 
-	printf("%d\n", ft_strcmp(str1, str2));
+	printf("%s\n", ft_strcpy(dst, src));
+	free(dst);
 
 	return (0);
 }

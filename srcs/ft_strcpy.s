@@ -1,30 +1,30 @@
 ; **************************************************************************** ;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    ft_strcmp.s                                        :+:      :+:    :+:    ;
+;    ft_strcpy.s                                        :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
-;    By: baptistegoron <baptistegoron@42angouleme.  +#+  +:+       +#+         ;
+;    By: bgoron <bgoron@42angouleme.fr>             +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
-;    Created: 2024/09/16 15:34:28 by baptistegoron     #+#    #+#              ;
-;    Updated: 2024/09/17 16:01:46 by bgoron           ###   ########.fr        ;
+;    Created: 2024/09/17 14:51:50 by bgoron            #+#    #+#              ;
+;    Updated: 2024/09/17 16:01:44 by bgoron           ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section .text
-global ft_strcmp
+global ft_strcpy
 
-ft_strcmp:
+ft_strcpy:
+	mov		rax, rdi
 	jmp		.loop
-.incr:
+.inc:
 	inc		rdi
 	inc		rsi
 .loop:
-	movzx	eax, byte [rdi]
-	test	eax, eax
+	movzx	ecx, byte [rsi]
+	mov		byte [rdi], cl
+	test	cl, cl
 	je		.return
-	cmp		al, byte [rsi]
-	je		.incr
+	jmp		.inc
 .return:
-	sub		al, byte [rsi]
-	movsx	rax, al
 	ret
+	
