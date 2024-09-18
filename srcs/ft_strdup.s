@@ -1,25 +1,32 @@
 ; **************************************************************************** ;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    ft_strlen.s                                        :+:      :+:    :+:    ;
+;    ft_strdup.s                                        :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
-;    By: baptistegoron <baptistegoron@42angouleme.  +#+  +:+       +#+         ;
+;    By: bgoron <bgoron@42angouleme.fr>             +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
-;    Created: 2024/09/13 15:40:44 by baptistegoron     #+#    #+#              ;
-;    Updated: 2024/09/17 16:39:52 by bgoron           ###   ########.fr        ;
+;    Created: 2024/09/17 16:31:42 by bgoron            #+#    #+#              ;
+;    Updated: 2024/09/18 15:23:31 by bgoron           ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
-section	.text
-global	ft_strlen
+extern	ft_strlen
+extern	ft_strcpy
+extern	malloc
 
-ft_strlen:
-	mov		rax, rdi
-.loop:
-	cmp		byte [rax], 0
-	je		.return
+section	.text
+global	ft_strdup
+
+ft_strdup:
+	push	rdi
+	call	ft_strlen
 	inc		rax
-	jmp		.loop
-.return:
-	sub		rax, rdi
+	mov		rdi, rax
+	call	malloc
+	test	rax, rax
+	je		.fail
+	mov		rdi, rax
+	pop		rsi
+	call	ft_strcpy
+.fail:
 	ret

@@ -6,12 +6,12 @@
 ;    By: baptistegoron <baptistegoron@42angouleme.  +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2024/09/16 15:34:28 by baptistegoron     #+#    #+#              ;
-;    Updated: 2024/09/17 16:01:46 by bgoron           ###   ########.fr        ;
+;    Updated: 2024/09/17 16:39:49 by bgoron           ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
-section .text
-global ft_strcmp
+section	.text
+global	ft_strcmp
 
 ft_strcmp:
 	jmp		.loop

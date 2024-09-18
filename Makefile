@@ -1,10 +1,11 @@
 NAME = libasm.a
 SRCS := ft_strlen.s \
 		ft_strcpy.s \
-		ft_strcmp.s
+		ft_strcmp.s \
+		ft_strdup.s
 
 SRCS := $(addprefix srcs/, $(SRCS))
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 NASMFLAGS = -f elf64
 OBJS_DIR = .objs
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.s=.o))
