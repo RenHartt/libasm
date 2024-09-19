@@ -1,33 +1,47 @@
 NAME = libasm.a
-SRCS := ft_strlen.s \
-		ft_strcpy.s \
-		ft_strcmp.s \
-		ft_strdup.s \
-		ft_write.s  \
-		ft_read.s
 
-SRCS := $(addprefix srcs/, $(SRCS))
-CFLAGS = -Wall -Wextra -Werror -g
-NASMFLAGS = -f elf64
-OBJS_DIR = .objs
-OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.s=.o))
+MANDATORY_SRCS = $(wildcard srcs/mandatory/*.s)
+MANDATORY_OBJS_DIR = srcs/mandatory/.objs
+MANDATORY_OBJS = $(MANDATORY_SRCS:srcs/mandatory/%.s=$(MANDATORY_OBJS_DIR)/%.o)
+
+BONUS_SRCS = $(wildcard srcs/bonus/*.s)
+BONUS_OBJS_DIR = srcs/bonus/.objs
+BONUS_OBJS = $(BONUS_SRCS:srcs/bonus/%.s=$(BONUS_OBJS_DIR)/%.o)
+
 NASM = nasm
-all: $(NAME)
+NASMFLAGS = -f elf64
+AR = ar rcs
+RANLIB = ranlib
 
-$(NAME): $(OBJS)
-	ar rc $@ $^
+all: $(MANDATORY_OBJS) $(NAME)
 
-$(OBJS_DIR)/%.o: %.s
-	mkdir -p $(OBJS_DIR)/srcs
+$(NAME): $(MANDATORY_OBJS)
+	$(AR) $(NAME) $(MANDATORY_OBJS)
+	$(RANLIB) $(NAME)
+
+$(MANDATORY_OBJS_DIR)/%.o: srcs/mandatory/%.s | $(MANDATORY_OBJS_DIR)
 	$(NASM) $(NASMFLAGS) $< -o $@
 
+$(MANDATORY_OBJS_DIR):
+	mkdir -p $(MANDATORY_OBJS_DIR)
+
+$(BONUS_OBJS_DIR)/%.o: srcs/bonus/%.s | $(BONUS_OBJS_DIR)
+	$(NASM) $(NASMFLAGS) $< -o $@
+
+$(BONUS_OBJS_DIR):
+	mkdir -p $(BONUS_OBJS_DIR)
+
+bonus: $(BONUS_OBJS)
+	$(AR) $(NAME) $(BONUS_OBJS)
+	$(RANLIB) $(NAME)
+
 clean:
-	rm -rf $(OBJS_DIR)
+	rm -rf $(MANDATORY_OBJS_DIR) $(BONUS_OBJS_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
 .SILENT:
+.PHONY: all clean fclean re bonus
