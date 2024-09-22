@@ -31,8 +31,8 @@ $(BONUS_OBJS_DIR)/%.o: srcs/bonus/%.s | $(BONUS_OBJS_DIR)
 $(BONUS_OBJS_DIR):
 	mkdir -p $(BONUS_OBJS_DIR)
 
-bonus: $(BONUS_OBJS)
-	$(AR) $(NAME) $(BONUS_OBJS)
+bonus: $(MANDATORY_OBJS) $(BONUS_OBJS)
+	$(AR) $(NAME) $(MANDATORY_OBJS) $(BONUS_OBJS)
 	$(RANLIB) $(NAME)
 
 clean:
@@ -43,5 +43,4 @@ fclean: clean
 
 re: fclean all
 
-.SILENT:
 .PHONY: all clean fclean re bonus
