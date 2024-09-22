@@ -6,7 +6,7 @@
 /*   By: bgoron <bgoron@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:28:58 by bgoron            #+#    #+#             */
-/*   Updated: 2024/09/22 01:08:06 by bgoron           ###   ########.fr       */
+/*   Updated: 2024/09/22 21:21:09 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,22 @@ int ft_atoi(const char *str);
 
 int main(void)
 {
+	char *input = NULL;
+
 	while (1)
 	{
-		char *input = readline("Entrez un nombre : ");
+		input = readline("Entrez un nombre : ");
 		
-		if (strcmp(input, "exit") == 0)
-		{
-			free(input);
-			break;
-		}
+		if (strcmp(input, "exit") == 0) { break; }
 
 		printf("Résultat de ft_atoi : %d\n", ft_atoi(input));
 		printf("Résultat de atoi    : %d\n", atoi(input));
 
 		free(input);
+		input = NULL;
 	}
+
+	free(input);
 
 	return (0);
 }
