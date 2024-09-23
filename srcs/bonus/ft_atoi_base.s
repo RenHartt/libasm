@@ -6,7 +6,7 @@
 ;    By: bgoron <bgoron@42angouleme.fr>             +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2024/09/22 01:44:46 by bgoron            #+#    #+#              ;
-;    Updated: 2024/09/23 14:40:48 by bgoron           ###   ########.fr        ;
+;    Updated: 2024/09/23 19:11:15 by bgoron           ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -20,8 +20,6 @@ ft_atoi_base:
     push    rbp
     mov     rbp, rsp
     sub     rsp, 256
-
-.test_args:
     test    rdi, rdi
     jz      .ret_cleanup
     test    rsi, rsi
@@ -56,11 +54,16 @@ ft_atoi_base:
     inc     r8
     dec     rcx
 .check_base:
-    movzx   r9, byte [r8]
-    cmp     r9, 0x2B
-    je      .ret_cleanup
-    cmp     r9, 0x2D
-    je      .ret_cleanup
+	movzx   r9, byte [r8]
+	cmp     r9, 0x2B
+	je      .ret_cleanup
+	cmp     r9, 0x2D
+	je      .ret_cleanup
+	cmp     r9, 0x20
+	je      .ret_cleanup
+	sub     r9, 0x09
+	cmp     r9, 0x04
+	jbe     .ret_cleanup
     cmp     byte [rsp + r9], 1
     je      .ret_cleanup
     mov     byte [rsp + r9], 1
