@@ -6,7 +6,7 @@
 ;    By: bgoron <bgoron@42angouleme.fr>             +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2024/09/22 01:44:46 by bgoron            #+#    #+#              ;
-;    Updated: 2024/09/23 19:13:56 by bgoron           ###   ########.fr        ;
+;    Updated: 2024/09/23 19:15:58 by bgoron           ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -25,7 +25,7 @@ ft_atoi_base:
     test    rsi, rsi
     jz      .ret_cleanup
 
-.init_and_check_size:
+.init_check_size:
 	push	rdi
     mov     rdi, rsi
     call    ft_strlen
@@ -48,7 +48,7 @@ ft_atoi_base:
     mov     rcx, rdx
 	mov		r8, rsi
 	jmp		.check_base
-.inc_and_check_base:
+.inc_check_base:
     cmp		byte [r8], 0
     jz      .ret_cleanup
     inc     r8
@@ -69,39 +69,39 @@ ft_atoi_base:
     mov     byte [rsp + r9], 1
 	test    rcx, rcx
     jz      .space_loop
-    jmp     .inc_and_check_base
+    jmp     .inc_check_base
 
-.inc_and_space_loop:
+.inc_space_loop:
     inc     rdi
 .space_loop:
     cmp     byte [rdi], 0x20
-    je      .inc_and_space_loop
+    je      .inc_space_loop
     cmp     byte [rdi], 0x09
     jl      .ret_cleanup
     cmp     byte [rdi], 0x0D
-    jg      .init_and_sign_loop
-    jmp     .inc_and_space_loop
+    jg      .init_sign_loop
+    jmp     .inc_space_loop
 
-.init_and_sign_loop:
+.init_sign_loop:
 	mov		rcx, 1
 	jmp		.sign_loop
-.inc_and_sign_loop:
+.inc_sign_loop:
 	inc		rdi
 .sign_loop:
     cmp     byte [rdi], 0x2B
-	je		.inc_and_sign_loop
+	je		.inc_sign_loop
     cmp     byte [rdi], 0x2D
     je      .handle_minus
     jmp     .init_find_char_in_base
 
 .handle_minus:
 	imul	rcx, -1
-	jmp		.inc_and_sign_loop
+	jmp		.inc_sign_loop
 
 .init_find_char_in_base:
 	mov		r8, rsi
 	jmp		.find_char_in_base
-.inc_and_find_char_in_base:
+.inc_find_char_in_base:
 	inc		r8
 .find_char_in_base:
 	cmp		byte [r8], 0
@@ -109,7 +109,7 @@ ft_atoi_base:
 	mov		r10b, byte [r8]
 	cmp		byte [rdi], r10b
 	je		.convert_char
-	jmp		.inc_and_find_char_in_base
+	jmp		.inc_find_char_in_base
 
 .convert_char:
 	sub		r8, rsi
