@@ -11,7 +11,7 @@
 ; **************************************************************************** ;
 
 global ft_list_push_front
-									;	rdi : **list / rsi : *data / rax : malloc
+
 extern malloc
 
 section .text
