@@ -6,14 +6,15 @@
 ;    By: bgoron <bgoron@42angouleme.fr>             +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2024/09/18 19:30:34 by bgoron            #+#    #+#              ;
-;    Updated: 2024/09/18 19:36:36 by bgoron           ###   ########.fr        ;
+;    Updated: 2024/09/23 14:39:53 by bgoron           ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
+
+global	ft_read
 
 extern __errno_location
 
 section	.text
-global	ft_read
 
 ft_read:
 	mov		rax, 0

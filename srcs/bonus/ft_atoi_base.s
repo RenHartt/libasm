@@ -6,14 +6,15 @@
 ;    By: bgoron <bgoron@42angouleme.fr>             +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2024/09/22 01:44:46 by bgoron            #+#    #+#              ;
-;    Updated: 2024/09/22 21:18:15 by bgoron           ###   ########.fr        ;
+;    Updated: 2024/09/23 14:40:48 by bgoron           ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
+
+global	ft_atoi_base
 
 extern ft_strlen;
 
 section	.text
-global	ft_atoi_base
 
 ft_atoi_base:
     push    rbp
@@ -75,24 +76,24 @@ ft_atoi_base:
     cmp     byte [rdi], 0x09
     jl      .ret_cleanup
     cmp     byte [rdi], 0x0D
-    jg      .check_sign
+    jg      .init_and_sign_loop
     jmp     .inc_and_space_loop
 
-.check_sign:
-    mov     rcx, 1
+.init_and_sign_loop:
+	mov		rcx, 1
+	jmp		.sign_loop
+.inc_and_sign_loop:
+	inc		rdi
+.sign_loop:
     cmp     byte [rdi], 0x2B
-    je      .handle_plus
+	je		.inc_and_sign_loop
     cmp     byte [rdi], 0x2D
     je      .handle_minus
     jmp     .init_find_char_in_base
 
-.handle_plus:
-    inc     rdi
-    jmp     .init_find_char_in_base
-
 .handle_minus:
-    mov     rcx, -1
-    inc     rdi
+	imul	rcx, -1
+	jmp		.inc_and_sign_loop
 
 .init_find_char_in_base:
 	mov		r8, rsi

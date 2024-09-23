@@ -6,16 +6,17 @@
 ;    By: bgoron <bgoron@42angouleme.fr>             +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2024/09/17 16:31:42 by bgoron            #+#    #+#              ;
-;    Updated: 2024/09/18 15:23:31 by bgoron           ###   ########.fr        ;
+;    Updated: 2024/09/23 14:39:43 by bgoron           ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
+
+global	ft_strdup
 
 extern	ft_strlen
 extern	ft_strcpy
 extern	malloc
 
 section	.text
-global	ft_strdup
 
 ft_strdup:
 	push	rdi

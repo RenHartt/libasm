@@ -6,12 +6,13 @@
 ;    By: baptistegoron <baptistegoron@42angouleme.  +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2024/09/13 15:40:44 by baptistegoron     #+#    #+#              ;
-;    Updated: 2024/09/17 16:39:52 by bgoron           ###   ########.fr        ;
+;    Updated: 2024/09/23 14:40:17 by bgoron           ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
-section	.text
 global	ft_strlen
+
+section	.text
 
 ft_strlen:
 	mov		rax, rdi

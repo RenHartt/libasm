@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_list_size.c                                   :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgoron <bgoron@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 13:48:18 by bgoron            #+#    #+#             */
-/*   Updated: 2024/09/23 13:54:31 by bgoron           ###   ########.fr       */
+/*   Created: 2024/09/23 13:49:15 by bgoron            #+#    #+#             */
+/*   Updated: 2024/09/23 13:49:42 by bgoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#pragma once
 
-int ft_list_size(t_list *begin_list);
-
-int main(void)
+typedef struct s_list
 {
-	return (0);
-}
+	void			*data;
+	struct s_list	*next;
+} t_list;
